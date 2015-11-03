@@ -7,17 +7,12 @@ response.setDateHeader("Expires", 0); //Causes the proxy cache to see the page a
 response.setHeader("Pragma","no-cache"); //HTTP 1.0 backward compatibility
 
     String username = request.getParameter("user");
-
-	if(username.length()<=0){
-	    
-	}else{
-	    List<String> users = (List<String>)session.getAttribute("users");
-	 
-	    if(null == users) {
-	        users = new ArrayList<String>();
-	    }
-	    users.add(username);
-	    session.setAttribute("users", users);
-	    response.sendRedirect("index.jsp");
-	}
+    List<String> users = (List<String>)session.getAttribute("users");
+ 
+    if(null == users) {
+        users = new ArrayList<String>();
+    }
+    users.add(username);
+    session.setAttribute("users", users);
+    response.sendRedirect("index.jsp");
 %>

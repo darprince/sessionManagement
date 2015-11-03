@@ -27,35 +27,29 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0 backward compatibility
 	<%
 	    }
 	%>
-	
-	<span style="float: right">
-	<a href="DestroySession.jsp">Destroy this session</a>
-	</span>
-	
+<span style="float: right">
+<a href="DestroySession.jsp">Destroy this session</a>
+</span>
     <form method="post" action="AddUser.jsp">
         <h3>Enter Username to Add in List</h3>
         <input type="text" name="user"/>
         <input type="submit" value="Add User"/>
     </form>
-    
-	 <a href="page.jsp">Test</a><br><br>
-	 
-	 <form method="post" action="redirect.jsp">
-		 <input type="hidden" name="redirect" value="page.jsp">
-		 <input type="submit" value="Redirect">
-	 </form>
-	 
+ <a href="page.jsp">Test</a><br><br>
+ 
+ <form method="post" action="redirect.jsp">
+ <input type="hidden" name="redirect" value="page.jsp">
+ <input type="submit" value="Redirect"></form> 
     <%
-    	try{
-	        String user = session.getAttribute("users").toString();
-	        out.println("User: "+user);
-    	}catch(Exception e){
-    	    
-    	}
+
+        List<String> users = (List<String>)session.getAttribute("users");
+        for(int i=0; null!=users && i < users.size(); i++) {
+            out.println("<br/>" + users.get(i));
+        }
     
         System.out.println("Salt: "+UserToAdd.generateSalt());
         System.out.println("Password-Hashed: "+UserToAdd.generateHash("thisismypassword"));
+        
     %>
-    
 </body>
 </html>
